@@ -1,6 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState } from 'react';
+import { PostProvider } from '../context/PostContext';
+import { AuthProvider } from '../context/AuthContext';
 
-const Comment = ({ postId }) => {
+const Comments = ({ postId }) => {
+  const { posts, addComment } = useContext(PostContext);
+  const { user } = useContext(AuthContext);
+  const [commentText, setCommentText] = useState('');
+
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    addComment(postId, { author: user.username, text: commentText });
+    setCommentText('');
+  };
+
+  const post = posts.find(post => post.id === postId);
+
+  return (
+    <div>
+      <h3>Comments</h3>
+      <ul>
+        {post.comments.map((comment, index) => (
+          <li key={index}><strong>{comment.author}</strong>: {comment.text}</li>
+        ))}
+      </ul>
+      <form onSubmit={handleCommentSubmit}>
+        <input
+          type="text"
+          value={commentText}
+          onChange={(e) => setCommentText(e.target.value)}
+          placeholder="Add a comment"
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+};
+
+export default Comments;
+
+
+/* const Comment = ({ postId }) => {
   const getInitialComments = () => {
     const list = localStorage.getItem(`comments_${postId}`);
     const savedComments = JSON.parse(list);
@@ -68,4 +107,4 @@ const Comment = ({ postId }) => {
   ); 
 }
 
-export default Comment;
+export default Comment; */

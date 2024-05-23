@@ -6,26 +6,33 @@ import Header from "./components/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
-import { AuthProvider, useAuth } from './context/AuthContext';
 import { PostProvider } from './context/PostContext';
+import PrivateRoutes from './components/PrivateRoutes';
 
 
 
 const App = () => {
-  const { currentUser } = useAuth();
-  
   return (
-    <AuthProvider>
-    <BrowserRouter>
+  <AuthProvider>
+    <PostProvider>
+      <BrowserRouter>
       <Header />
+
       <Routes>
+      <Route element={<PrivateRoutes />}>
         <Route path="/" element={<Home />} />
         <Route path="/Write" element={<Write />} />
         <Route path="/Sign in" element={<SignIn />}/>
+      </Route>
+
+      <Route path="/Log In" element={<LogIn/>} />
+      <Route path="/Sign Up" element={<SignUp />} />
+
       </Routes>
-      <PostProvider></PostProvider>
-    </BrowserRouter>
-    </AuthProvider>
+
+     </BrowserRouter>
+    </PostProvider>
+  </AuthProvider>
   );
 };
 
