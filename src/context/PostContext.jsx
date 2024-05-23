@@ -1,39 +1,57 @@
 import { createContext, useState } from "react";
+import { useAuth } from './AuthContext';
+import { storage } from '../firebase/firebaseConfig';
 
 export const PostContext = createContext();
 
-export const PostProvider = (props) => {
+export const usePostContext = () => useContext(PostContext);
 
-  const [posts, setPosts] = useState([
+export const PostProvider = ({ children }) => {
+
+    const { currentUser } = useAuth();
+
+    const firstPost = [
     {
       id: 1,
       title: "En dag i skogen",
       author: "Jane Doe",
-      text: "Idag tog jag en härlig promenad i skogen. Naturen var så vacker och lugnande."
-    },
-    {
-      id: 2,
-      title: "Recept: Vegetarisk pastarätt",
-      author: "John Smith",
-      text: "Här är mitt favoritrecept på en läcker vegetarisk pastarätt med färsk basilika och parmesan."
-    },
-    {
-      id: 3, 
-      title: "Vilken dag!",
-      author: "Jane Smith",
-      text: "Idag satt jag ute i solen och tog en kopp kaffe. Sen åt jag en glass. Gott!"
-    },
-    {
-      id: 4,
-      title: "Sportigt värre!",
-      author: "John Doe",
-      text: "Jag är helt slut! Idag har det sportats hela dagen. Vi sprang ner till badet, sprang hem och tog en cykeltur senare."
+      text: "Idag tog jag en härlig promenad i skogen. Naturen var så vacker och lugnande.",
+      comments: [],
     }
-  ]);
+      ];
+
+  const addNewPost = (title, text, author) => {
+    const newPost = { id: Date.now(), title, author, text };
+    setPosts([...posts, newPost]);
+  };
+
+  const updatePost = (id, updatedPost) => {
+    setPosts(posts.map(post => post.id === id ? updatedPost : post));
+  };
+
+  const deleteBlog = (id) => {
+    setPosts(posts.filter(post => post.id !== id));
+  };
+
+  const addComment = (postId, comment) => {
+    setPosts(posts.map(blog =>
+      post.id === postId ? { ...post, comments: [...post.comments, comment] } : post
+    ));
+  };
+
+  const [posts, setPosts] = useState(() => {
+    const storedPosts = localStorage.getItem('posts');
+    return storedPosts ? JSON.parse(storedPosts) : defaultPosts;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('posts', JSON.stringify(posts));
+  }, [posts]);
+
     return (
-    <PostContext.Provider value={{ posts }}>
-      <div className="gap-7 max-w-md flex flex-col justify-center">
-      {props.children}
+    <PostContext.Provider value={{ posts, addPost, updatePost, deletePost, addComment }}>
+      <div>
+      {children}
       </div>
     </PostContext.Provider>  
     );

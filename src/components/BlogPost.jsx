@@ -1,23 +1,25 @@
-import React, { useContext } from "react";
-import { PostContext } from "../context/PostContext";
-import Comment from "../components/Comment";
+import React, { useContext } from 'react';
+import { PostContext } from '../context/PostContext';
+import { AuthContext } from '../context/AuthContext';
 
-const BlogPosts = () => {
-  const { posts } = useContext(PostContext);
+const BlogPost = ({ post }) => {
+  const { deletePost } = useContext(PostContext);
+  const { user } = useContext(AuthContext);
+
+  const handleDelete = () => {
+    deletePost(post.id);
+  };
 
   return (
-    <>
-      {posts.map((post, index) => (
-        <div key={index}>
-          <h2>{post.title}</h2>
-          <p>Author: {post.author}</p>
-          <p>{post.text}</p>
-          <h3>Comments:</h3>
-          <Comment postId={post.id}/>
-        </div>
-      ))}
-    </>
+    <div>
+      <h2>{post.title}</h2>
+      <p>{post.author}</p>
+      <p>{post.text}</p>
+      {user.username === post.author && (
+        <button onClick={handleDelete}>Delete</button>
+      )}
+    </div>
   );
 };
 
-export default BlogPosts;
+export default BlogPost;
