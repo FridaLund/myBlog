@@ -17,84 +17,64 @@ const LogIn = () => {
           await signInUser(email, password);
         }
       };
-    
     return (
        <>
-        {userLoggedIn && <Navigate to={"/"} replace={true} />}
+      {userLoggedIn && <Navigate to={"/"} replace={true} />}
+    <div className="">
+        <h3 className="">
+        Hello! Welcome back! 
+        </h3>
+    </div>
 
-        <div className="">
-            <h3 className="">
-                Create a new account
-            </h3>
+    <form onSubmit={onSubmit} className="">
+        <div>
+            <label className=""> E-mail: </label>
+            <input 
+            type="email" 
+            autoComplete="email"
+            required
+            value={email}
+            onChange={(e) => {
+                setEmail(e.target.value);
+            }}
+            className=""
+            />
         </div>
 
-        <form onSubmit={onSubmit}>
-            <div>
-                <label > E-mail </label>
-                <input 
-                type="email"
-                autoComplete="email"
-                required
-                value={email}
-                onChange={(e) => {
-                    setEmail(e.target.value);
-                }}
-                className=""/>
-            </div>
-            
-            <div>
-                <label className="">
-                    Password
-                </label>
-                <input 
-                type="password" 
-                autoComplete="new-password"
-                required
-                value={password}
-                onChange={(e) => {
-                    setPassword(e.target.value);
-                }}
-                className=""
-                />
-            </div>
+        <div className="">
+            <label className=""> Password: </label>
+            <input 
+            type="password" 
+            autoComplete="current-password"
+            required
+            value={password}
+            onChange={(e) => {
+                setPassword(e.target.value);
+            }}
+            className="" 
+            />   
+        </div>
 
-            <div>
-                <label className="">
-                    Confirm password 
-                </label>
-                <input 
-                disabled={isRegistering}
-                type="password" 
-                autoComplete="off"
-                required
-                value={confirmPassword}
-                onChange={(e) =>{
-                    setconfirmPassword(e.target.value);
-                }}
-                className=""/>
-            </div>
-
-            {errorMessage && (
-                <span className=""> {errorMessage}</span>
+        {errorMessage && (
+              <span className="text-red-600 font-bold">{errorMessage}</span>
             )}
 
-            <button
-            type="submit"
-            disabled={isRegistering}
-            className={`login-button ${
-                isSigningIn ? 'disabled' : ''
-              }`}>
-                {isSigningIn ? 'Signing In...' : 'Sign In'}
-              </button>
-        </form>
-        <p className="login-signup">
-            Don't have an account?{' '}
-            <Link to={'/register'} className="login-signup-link">
+        <button 
+        type="submit"
+        disabled={isSigningIn}
+        className={`login-button ${
+            isSigningIn ? 'disabled' : ''
+          }`}>
+             {isSigningIn ? 'Signing In...' : 'Sign In'}
+         </button>
+    </form>
+
+    <p className="text-center text-sm">
+            Don't have an account?{" "}
+            <Link to={"/signup"} className="">
               Sign up
             </Link>
-        </p>
-
-
+          </p>
        </>
     )
 }

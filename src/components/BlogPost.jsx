@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+/* import React, { useContext } from 'react';
 import { PostContext } from '../context/PostContext';
 import { AuthContext } from '../context/AuthContext';
 
@@ -22,4 +22,4 @@ const BlogPost = ({ post }) => {
   );
 };
 
-export default BlogPost;
+export default BlogPost; */

@@ -7,13 +7,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import { PostProvider } from './context/PostContext';
+
 import PrivateRoutes from './components/PrivateRoutes';
-
-
+import { AuthProvider } from './context/AuthContext';
 
 const App = () => {
   return (
   <AuthProvider>
+
     <PostProvider>
       <BrowserRouter>
       <Header />
@@ -25,13 +26,14 @@ const App = () => {
         <Route path="/Sign in" element={<SignIn />}/>
       </Route>
 
-      <Route path="/Log In" element={<LogIn/>} />
-      <Route path="/Sign Up" element={<SignUp />} />
+      <Route path="/login" element={<LogIn/>} />
+      <Route path="/signup" element={<SignUp />} />
 
       </Routes>
 
      </BrowserRouter>
     </PostProvider>
+
   </AuthProvider>
   );
 };

@@ -1,13 +1,12 @@
-import { createContext, useState } from "react";
-import { useAuth } from './AuthContext';
-import { storage } from '../firebase/firebaseConfig';
+import { createContext, useState, useEffect, useContext } from "react";
+import { useAuth } from "./AuthContext";
+
 
 export const PostContext = createContext();
 
 export const usePostContext = () => useContext(PostContext);
 
 export const PostProvider = ({ children }) => {
-
     const { currentUser } = useAuth();
 
     const firstPost = [
@@ -20,39 +19,43 @@ export const PostProvider = ({ children }) => {
     }
       ];
 
-  const addNewPost = (title, text, author) => {
-    const newPost = { id: Date.now(), title, author, text };
-    setPosts([...posts, newPost]);
+      const addNewPost = (title, text) => {
+        const newPost = { id: Date.now(), title, author: currentUser.username, text, comments:[] };
+        setPosts((prevPosts) => [...prevPosts, newPost]);
+      };
+
+  const updatePost = (postId, updatedPost) => {
+    setPosts((prevPosts) =>
+      prevPosts.map((post) =>
+        post.id === postId ? { ...post, ...updatedPost } : post
+      )
+    );
   };
 
-  const updatePost = (id, updatedPost) => {
-    setPosts(posts.map(post => post.id === id ? updatedPost : post));
-  };
-
-  const deleteBlog = (id) => {
-    setPosts(posts.filter(post => post.id !== id));
-  };
+ const deletePost = (postId) => {
+  setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+};
 
   const addComment = (postId, comment) => {
-    setPosts(posts.map(blog =>
+    setPosts(posts.map(post =>
       post.id === postId ? { ...post, comments: [...post.comments, comment] } : post
     ));
   };
 
   const [posts, setPosts] = useState(() => {
     const storedPosts = localStorage.getItem('posts');
-    return storedPosts ? JSON.parse(storedPosts) : defaultPosts;
+    console.log(storedPosts);
+    return storedPosts ? JSON.parse(storedPosts) : firstPost;
   });
+  console.log(posts);
 
   useEffect(() => {
     localStorage.setItem('posts', JSON.stringify(posts));
   }, [posts]);
 
     return (
-    <PostContext.Provider value={{ posts, addPost, updatePost, deletePost, addComment }}>
-      <div>
+    <PostContext.Provider value={{ posts, currentUser, addNewPost, updatePost, deletePost, addComment }}>
       {children}
-      </div>
     </PostContext.Provider>  
     );
   };

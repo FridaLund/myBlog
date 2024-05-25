@@ -1,14 +1,15 @@
-import BlogPosts from '../components/BlogPosts'
-import { PostProvider } from '../context/PostContext';
+import React from "react";
+import BlogPosts from "../components/BlogPosts";
+
+
 
 const Home = () => {
+
     return (
       <>
-      <PostProvider>
-        <div className="flex flex-col justify-center">
-        <BlogPosts></BlogPosts>
-        </div>
-        </PostProvider>
+            <div>
+      <BlogPosts />
+            </div>
       </>
     );
   };

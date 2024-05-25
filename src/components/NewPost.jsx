@@ -1,17 +1,15 @@
 
 import React, { useContext, useState } from "react";
-import { NewPostContext } from "../context/NewPostContext";
-
+import { PostContext } from "../context/PostContext";
 
 const NewPost = () => {
-  const {addNewPost} = useContext(NewPostContext);
+  const {addNewPost} = useContext(PostContext);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newPost = { title, content};
-    addNewPost (newPost);
+    addNewPost(title, content);
     setTitle("");
     setContent("");
   };
