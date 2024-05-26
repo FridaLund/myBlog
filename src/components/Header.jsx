@@ -1,14 +1,32 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { signOutUser } from "../firebase/authFunctions";
 
 const Header = () => {
-  return (
-    <div className="p-4 flex justify-between items-center">
-      <h1> MEDIUM </h1>
-        <Link to="/" > HOME </Link>
-        <Link to="/write" > WRITE </Link>
-        <Link to="/signin"> SIGN IN </Link>
+    const { currentUser, userLoggedIn } = useContext(AuthContext);
 
-      </div>
+  return (
+    <div className="flex mt-4 mx-5 justify-between items-center">
+      <h1> FRIDIUM </h1>
+
+      <nav>
+        {userLoggedIn ? (
+            <>
+            <Link to="/" > HOME </Link>
+            <Link to="/write" > WRITE </Link>
+            <p>User: {currentUser.email}</p>
+            <button onClick={signOutUser}> Log out </button>
+            </>
+        ) : (
+            <>
+            <Link to="/login"> LOG IN </Link>
+            <Link to="/signup"> SIGN UP </Link>
+            </>
+        )}
+      </nav>
+
+    </div>
   );
 };
 

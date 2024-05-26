@@ -3,7 +3,7 @@ import { Navigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { signInUser } from "../firebase/authFunctions";
 
-const LogIn = () => {
+const LogInComponent = () => {
     const { userLoggedIn } = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -22,7 +22,7 @@ const LogIn = () => {
       {userLoggedIn && <Navigate to={"/"} replace={true} />}
     <div className="">
         <h3 className="">
-        Hello! Welcome back! 
+        Please log in here: 
         </h3>
     </div>
 
@@ -65,7 +65,7 @@ const LogIn = () => {
         className={`login-button ${
             isSigningIn ? 'disabled' : ''
           }`}>
-             {isSigningIn ? 'Signing In...' : 'Sign In'}
+             {isSigningIn ? 'Signing In...' : 'Log in'}
          </button>
     </form>
 
@@ -79,4 +79,4 @@ const LogIn = () => {
     )
 }
 
-export default LogIn;
+export default LogInComponent;

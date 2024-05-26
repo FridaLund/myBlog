@@ -42,6 +42,16 @@ export const PostProvider = ({ children }) => {
     ));
   };
 
+  const deleteComment = (postId, commentIndex) => {
+    setPosts(prevPosts =>
+      prevPosts.map(post =>
+        post.id === postId
+          ? { ...post, comments: post.comments.filter((_, index) => index !== commentIndex) }
+          : post
+      )
+    );
+  };
+
   const [posts, setPosts] = useState(() => {
     const storedPosts = localStorage.getItem('posts');
     console.log(storedPosts);
@@ -54,7 +64,7 @@ export const PostProvider = ({ children }) => {
   }, [posts]);
 
     return (
-    <PostContext.Provider value={{ posts, currentUser, addNewPost, updatePost, deletePost, addComment }}>
+    <PostContext.Provider value={{ posts, currentUser, addNewPost, updatePost, deletePost, addComment, deleteComment }}>
       {children}
     </PostContext.Provider>  
     );

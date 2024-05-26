@@ -3,7 +3,7 @@ import { PostContext } from '../context/PostContext';
 import { AuthContext } from '../context/AuthContext';
 
 const Comments = ({ postId }) => {
-  const { posts, addComment } = useContext(PostContext);
+  const { posts, addComment, deleteComment} = useContext(PostContext);
   const { currentUser } = useContext(AuthContext);
   console.log(currentUser);
   const [commentText, setCommentText] = useState('');
@@ -14,24 +14,34 @@ const Comments = ({ postId }) => {
     setCommentText('');
   };
 
+  const handleDeleteComment = (commentIndex) => {
+    deleteComment(postId, commentIndex);
+  };
+
   const post = posts.find(post => post.id === postId);
 
   return (
     <div>
       <h3>Comments</h3>
-      <ul>
-        {post.comments.map((comment, index) => (
-          <li key={index}><strong>{comment.author}</strong>: {comment.text}</li>
-        ))}
-      </ul>
+      <div>
+      {post.comments.map((comment, index) => (
+        <div key={index} style={{ marginBottom: '10px' }}>
+          <strong>{comment.author}</strong>
+          <div>{comment.text}</div>
+          {comment.author === currentUser.email && (
+              <button onClick={() => handleDeleteComment(index)}>Delete comment</button>
+            )}
+        </div>
+      ))}
+    </div>
       <form onSubmit={handleCommentSubmit}>
         <input
           type="text"
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
-          placeholder="Add a comment"
+          placeholder="Share your thoughts.."
         />
-        <button type="submit">Submit</button>
+        <button type="submit">Add comment</button>
       </form>
     </div>
   );

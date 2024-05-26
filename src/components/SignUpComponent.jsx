@@ -3,7 +3,7 @@ import { Navigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { createUser } from "../firebase/authFunctions";
 
-const SignUp = () => {
+const SignUpComponent = () => {
     const { userLoggedIn } = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -98,4 +98,4 @@ const SignUp = () => {
     )
 } 
 
-export default SignUp;
+export default SignUpComponent;
