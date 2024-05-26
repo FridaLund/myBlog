@@ -5,7 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 const Comments = ({ postId }) => {
   const { posts, addComment, deleteComment} = useContext(PostContext);
   const { currentUser, userLoggedIn } = useContext(AuthContext);
-  console.log(currentUser);
+
   const [commentText, setCommentText] = useState('');
 
   const handleCommentSubmit = (e) => {
@@ -20,7 +20,7 @@ const Comments = ({ postId }) => {
 
   const post = posts.find(post => post.id === postId);
 
-  console.log(currentUser);
+
 
   return (
     <div>

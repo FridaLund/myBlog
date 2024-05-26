@@ -7,9 +7,6 @@ const BlogPosts = () => {
   const { posts, deletePost } = useContext(PostContext);
   const { currentUser } = useContext(AuthContext);
 
-  console.log("User:", currentUser);
-  console.log("Posts:", posts);
-
   const handleDelete = (id) => {
     deletePost(id);
   };

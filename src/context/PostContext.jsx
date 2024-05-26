@@ -54,10 +54,10 @@ export const PostProvider = ({ children }) => {
 
   const [posts, setPosts] = useState(() => {
     const storedPosts = localStorage.getItem('posts');
-    console.log(storedPosts);
+
     return storedPosts ? JSON.parse(storedPosts) : firstPost;
   });
-  console.log(posts);
+
 
   useEffect(() => {
     localStorage.setItem('posts', JSON.stringify(posts));
