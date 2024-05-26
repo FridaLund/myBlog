@@ -63,16 +63,16 @@ const LogInComponent = () => {
         <button 
         type="submit"
         disabled={isSigningIn}
-        className={`login-button m-3 bg-blue-900 p-2 ${
+        className={`login-button m-3 bg-blue-900 p-2 font-bold ${
             isSigningIn ? 'disabled' : ''
           }`}>
           {isSigningIn ? 'Signing In...' : 'Log in'}
         </button>
       </form>
 
-      <p className="text-center text-sm">
+      <p className="m-3 font-bold">
         Don't have an account?{" "}
-        <Link to={"/signup"} className="">
+        <Link to={"/signup"} className="m-3 bg-blue-900 p-2">
           Sign up
         </Link>
       </p>

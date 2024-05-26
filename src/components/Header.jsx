@@ -20,6 +20,7 @@ const Header = () => {
             </>
         ) : (
             <>
+            <Link to="/" className="m-3" > HOME </Link>
             <Link to="/login" className="m-3"> LOG IN </Link>
             <Link to="/signup" className="m-3"> SIGN UP </Link>
             </>

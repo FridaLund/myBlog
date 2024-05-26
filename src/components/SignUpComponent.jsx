@@ -23,15 +23,15 @@ const SignUpComponent = () => {
         <>
           {userLoggedIn && <Navigate to={"/"} replace={true} />}
 
-<div className="">
-    <h3 className="">
+<div>
+    <h3 className="m-3 font-bold">
         Create a new account
     </h3>
 </div>
 
 <form onSubmit={onSubmit}>
     <div>
-        <label > E-mail </label>
+        <label className="m-3  font-bold"> E-mail </label>
         <input 
         type="email"
         autoComplete="email"
@@ -44,7 +44,7 @@ const SignUpComponent = () => {
     </div>
     
     <div>
-        <label className="">
+        <label className="m-3  font-bold">
             Password
         </label>
         <input 
@@ -60,7 +60,7 @@ const SignUpComponent = () => {
     </div>
 
     <div>
-        <label className="">
+        <label className="m-3  font-bold">
             Confirm password 
         </label>
         <input 
@@ -72,7 +72,8 @@ const SignUpComponent = () => {
         onChange={(e) =>{
             setConfirmPassword(e.target.value);
         }}
-        className=""/>
+        className="my-2 p-1 text-gray-900" 
+        />
     </div>
 
     {errorMessage && (
@@ -82,18 +83,12 @@ const SignUpComponent = () => {
     <button
     type="submit"
     disabled={isRegistering}
-    className={`login-button ${
+    className={`login-button m-3 bg-blue-900 p-2 font-bold ${
         isRegistering ? 'disabled' : ''
       }`}>
         {isRegistering ? 'Signing Up...' : 'Sign Up'}
       </button>
 </form>
-<p className="login-signup">
-    Don't have an account?{' '}
-    <Link to={'/register'} className="login-signup-link">
-      Sign up
-    </Link>
-</p>
         </>
     )
 } 
