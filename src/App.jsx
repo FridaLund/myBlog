@@ -8,7 +8,6 @@ import LogInComponent from './components/LogInComponent';
 import { PostProvider } from './context/PostContext';
 import PrivateRoutes from './components/PrivateRoutes';
 import { AuthProvider } from './context/AuthContext';
-import { createUser } from './firebase/authFunctions';
 
 const App = () => {
   return (
@@ -20,12 +19,12 @@ const App = () => {
 
       <Routes>
       <Route element={<PrivateRoutes />}>
-        <Route path="/" element={<Home />} />
         <Route path="/write" element={<Write />} />
       </Route>
 
       <Route path="/login" element={<LogInComponent />} />
       <Route path="/signup" element={<SignUpComponent />} />
+      <Route path="/*" element={<Home />} />
       
       </Routes>
 

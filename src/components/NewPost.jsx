@@ -15,26 +15,28 @@ const NewPost = () => {
   };
 
     return (
-     <div>
-     <h1>New Post</h1>
+     <div className="flex-col">
+        <div className="flex-col">
+        <form onSubmit={handleSubmit}>
 
-     <form onSubmit={handleSubmit}>
-        
-     <input 
-     type="text" 
-     placeholder="title" 
-     value={title} 
-     onChange={(e) => setTitle(e.target.value)}
-     />
+        <input 
+        type="text" 
+        placeholder="Title" 
+        value={title} 
+        onChange={(e) => setTitle(e.target.value)}
+        className="m-2 pl-1 pt-1.5 pb-2 text-gray-900"
+        />
 
-     <textarea 
-     placeholder="Content"
-     value={content}
-     onChange={(e) => setContent(e.target.value)}
-     ></textarea>
+        <textarea 
+        placeholder="Content"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        className="m-3 pl-1 pt-1.5 pb-2 text-gray-900"
+        ></textarea>
 
-     <button type="submit">Post</button>
-    </form>
+        <button type="submit" className="m-3 bg-blue-900 p-2">Post</button>
+        </form>
+        </div>
 
      </div>
     ); 

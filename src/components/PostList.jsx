@@ -6,7 +6,7 @@ const PostList = () => {
   const { posts } = useContext(PostContext);
 
   return (
-    <div>
+    <div className="m-6">
       {posts.map(post => (
         <BlogPost key={post.id} post={post} />
       ))}

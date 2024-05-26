@@ -20,7 +20,7 @@ export const PostProvider = ({ children }) => {
       ];
 
       const addNewPost = (title, text) => {
-        const newPost = { id: Date.now(), title, author: currentUser.username, text, comments:[] };
+        const newPost = { id: Date.now(), title, author: currentUser.email, text, comments:[] };
         setPosts((prevPosts) => [...prevPosts, newPost]);
       };
 

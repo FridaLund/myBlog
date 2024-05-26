@@ -4,8 +4,10 @@ import NewPost from "../components/NewPost";
 const Write = () => {
     return (
       <>
-      <h1>Write a new post: </h1>
+      <div className="flex-col">
+      <h1 className="ml-6 font-bold">Write a new post: </h1>
         <NewPost/>
+        </div>
       </>
     );
   };
