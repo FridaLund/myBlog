@@ -40,7 +40,7 @@ const SignUpComponent = () => {
         onChange={(e) => {
             setEmail(e.target.value);
         }}
-        className=""/>
+        className="my-2 pl-1 pt-1.5 pb-6 text-gray-900" />
     </div>
     
     <div>
@@ -55,7 +55,7 @@ const SignUpComponent = () => {
         onChange={(e) => {
             setPassword(e.target.value);
         }}
-        className=""
+        className="my-2 pl-1 pt-1.5 pb-6 text-gray-900"
         />
     </div>
 

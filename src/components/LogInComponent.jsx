@@ -18,17 +18,17 @@ const LogInComponent = () => {
         }
       };
     return (
-       <>
-      {userLoggedIn && <Navigate to={"/"} replace={true} />}
-    <div className="">
-        <h3 className="">
-        Please log in here: 
-        </h3>
-    </div>
+      <>
+        {userLoggedIn && <Navigate to={"/"} replace={true} />}
+        <div className="">
+          <h3 className="m-3 font-bold">
+            Please log in here: 
+          </h3>
+        </div>
 
-    <form onSubmit={onSubmit} className="">
-        <div>
-            <label className=""> E-mail: </label>
+        <form onSubmit={onSubmit}>
+          <div>
+            <label className="m-3 font-bold"> E-mail: </label>
             <input 
             type="email" 
             autoComplete="email"
@@ -36,14 +36,15 @@ const LogInComponent = () => {
             value={email}
             onChange={(e) => {
                 setEmail(e.target.value);
+                
             }}
-            className=""
+            className="my-2 p-1 text-gray-900"
             />
-        </div>
+          </div>
 
-        <div className="">
-            <label className=""> Password: </label>
-            <input 
+        <div>
+          <label className="m-3  font-bold"> Password: </label>
+          <input 
             type="password" 
             autoComplete="current-password"
             required
@@ -51,8 +52,8 @@ const LogInComponent = () => {
             onChange={(e) => {
                 setPassword(e.target.value);
             }}
-            className="" 
-            />   
+            className="my-2 p-1 text-gray-900" 
+          /> 
         </div>
 
         {errorMessage && (
@@ -62,19 +63,19 @@ const LogInComponent = () => {
         <button 
         type="submit"
         disabled={isSigningIn}
-        className={`login-button ${
+        className={`login-button m-3 bg-blue-900 p-2 ${
             isSigningIn ? 'disabled' : ''
           }`}>
-             {isSigningIn ? 'Signing In...' : 'Log in'}
-         </button>
-    </form>
+          {isSigningIn ? 'Signing In...' : 'Log in'}
+        </button>
+      </form>
 
-    <p className="text-center text-sm">
-            Don't have an account?{" "}
-            <Link to={"/signup"} className="">
-              Sign up
-            </Link>
-          </p>
+      <p className="text-center text-sm">
+        Don't have an account?{" "}
+        <Link to={"/signup"} className="">
+          Sign up
+        </Link>
+      </p>
        </>
     )
 }
