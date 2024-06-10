@@ -4,80 +4,80 @@ import { AuthContext } from "../context/AuthContext";
 import { signInUser } from "../firebase/authFunctions";
 
 const LogInComponent = () => {
-    const { userLoggedIn } = useContext(AuthContext);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [isSigningIn, setIsSigningIn] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
+  const { userLoggedIn } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isSigningIn, setIsSigningIn] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        if (!isSigningIn) {
-          setIsSigningIn(true);
-          await signInUser(email, password);
-        }
-      };
-    return (
-      <>
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (!isSigningIn) {
+      setIsSigningIn(true);
+      await signInUser(email, password);
+    }
+  };
+  return (
+    <>
+      <div className=" flex flex-col items-center justify-center gap-8">
         {userLoggedIn && <Navigate to={"/"} replace={true} />}
-        <div className="">
-          <h3 className="m-3 font-bold">
-            Please log in here: 
-          </h3>
+        <div>
+          <h3 className="font-bold">Please log in here:</h3>
         </div>
 
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className=" flex flex-col gap-2">
           <div>
-            <label className="m-3 font-bold"> E-mail: </label>
-            <input 
-            type="email" 
-            autoComplete="email"
-            required
-            value={email}
-            onChange={(e) => {
+            <label className="font-bold"> E-mail: </label>
+            <input
+              type="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => {
                 setEmail(e.target.value);
-                
-            }}
-            className="my-2 p-1 text-gray-900"
+              }}
+              className="my-2 p-1 text-gray-900"
             />
           </div>
 
-        <div>
-          <label className="m-3  font-bold"> Password: </label>
-          <input 
-            type="password" 
-            autoComplete="current-password"
-            required
-            value={password}
-            onChange={(e) => {
+          <div>
+            <label className="font-bold"> Password: </label>
+            <input
+              type="password"
+              autoComplete="current-password"
+              required
+              value={password}
+              onChange={(e) => {
                 setPassword(e.target.value);
-            }}
-            className="my-2 p-1 text-gray-900" 
-          /> 
-        </div>
+              }}
+              className="my-2 p-1 text-gray-900"
+            />
+          </div>
 
-        {errorMessage && (
-              <span className="text-red-600 font-bold">{errorMessage}</span>
-            )}
+          {errorMessage && (
+            <span className="text-red-600 font-bold">{errorMessage}</span>
+          )}
 
-        <button 
-        type="submit"
-        disabled={isSigningIn}
-        className={`login-button m-3 bg-blue-900 p-2 font-bold ${
-            isSigningIn ? 'disabled' : ''
-          }`}>
-          {isSigningIn ? 'Signing In...' : 'Log in'}
-        </button>
-      </form>
+          <button
+            type="submit"
+            disabled={isSigningIn}
+            className={`login-button bg-blue-900 p-2 w-[100px] font-bold ${
+              isSigningIn ? "disabled" : ""
+            }`}
+          >
+            {isSigningIn ? "Signing In..." : "Log in"}
+          </button>
+        </form>
 
-      <p className="m-3 font-bold">
-        Don't have an account?{" "}
-        <Link to={"/signup"} className="m-3 bg-blue-900 p-2">
-          Sign up
-        </Link>
-      </p>
-       </>
-    )
-}
+        <p className=" font-bold">
+          Don't have an account?{" "}
+          <Link to={"/signup"} className=" bg-blue-900 p-3">
+            Sign up
+          </Link>
+        </p>
+      </div>
+    </>
+  );
+};
 
 export default LogInComponent;

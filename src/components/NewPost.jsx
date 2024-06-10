@@ -1,9 +1,8 @@
-
 import React, { useContext, useState } from "react";
 import { PostContext } from "../context/PostContext";
 
 const NewPost = () => {
-  const {addNewPost} = useContext(PostContext);
+  const { addNewPost } = useContext(PostContext);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -14,32 +13,32 @@ const NewPost = () => {
     setContent("");
   };
 
-    return (
-     <div className="flex-col">
-        <div className="flex-col">
-        <form onSubmit={handleSubmit}>
+  return (
+    <div className=" flex flex-col items-center justify-center">
+      <div className="flex-col">
+        <form onSubmit={handleSubmit} className=" flex flex-col w-[500px]">
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="m-2 pl-1 pt-1.5 pb-2 text-gray-900"
+          />
 
-        <input 
-        type="text" 
-        placeholder="Title" 
-        value={title} 
-        onChange={(e) => setTitle(e.target.value)}
-        className="m-2 pl-1 pt-1.5 pb-2 text-gray-900"
-        />
+          <textarea
+            placeholder="Content"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            className="m-3 pl-1 pt-1.5 pb-2 text-gray-900"
+          ></textarea>
 
-        <textarea 
-        placeholder="Content"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        className="m-3 pl-1 pt-1.5 pb-2 text-gray-900"
-        ></textarea>
-
-        <button type="submit" className="m-3 bg-blue-900 p-2">Post</button>
+          <button type="submit" className="m-3 bg-blue-900 p-2">
+            Post
+          </button>
         </form>
-        </div>
+      </div>
+    </div>
+  );
+};
 
-     </div>
-    ); 
-  }
-  
-  export default NewPost;
+export default NewPost;
